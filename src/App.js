@@ -10,6 +10,7 @@ import About from './components/pages/About';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import NotFound from './components/pages/NotFound';
 
 class App extends Component {
   render() {
@@ -19,13 +20,11 @@ class App extends Component {
           <React.Fragment>
             <Header branding="Contact Manager" />
             <div className="container">
-              <h1 className="display-4">
-                <span className="text-info">Contact</span> List
-              </h1>
               <Switch>
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/about" component={About} />
+                <Route component={NotFound} />
               </Switch>
             </div>
           </React.Fragment>
