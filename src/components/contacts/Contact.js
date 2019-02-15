@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import axios from 'axios'
 
-import { Consumer } from '../../context';
+import { Consumer } from '../../context'
 
 class Contact extends Component {
   state = {
     showContact: false
-  };
+  }
 
   onShowClick = () => {
-    this.setState({ showContact: !this.state.showContact });
-  };
+    this.setState({ showContact: !this.state.showContact })
+  }
 
-  onDeleteClick = (id, dispatch) => {
-    dispatch({ type: 'DELETE_CONTACT', payload: id });
-  };
+  onDeleteClick = async (id, dispatch) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+    dispatch({ type: 'DELETE_CONTACT', payload: id })
+  }
 
   render() {
     return (
@@ -50,15 +52,15 @@ class Contact extends Component {
                 </ul>
               ) : null}
             </div>
-          );
+          )
         }}
       </Consumer>
-    );
+    )
   }
 }
 
 Contact.propTypes = {
   contact: PropTypes.object.isRequired
-};
+}
 
-export default Contact;
+export default Contact

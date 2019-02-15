@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Consumer } from '../../context'
 import TextInputGroup from '../layout/TextInputGroup'
 
-class AddContact extends Component {
+class EditContact extends Component {
   state = {
     name: '',
     email: '',
@@ -106,4 +106,4 @@ class AddContact extends Component {
   }
 }
 
-export default AddContact
+export default EditContact
