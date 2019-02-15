@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import { Consumer } from '../../context'
 
@@ -40,6 +41,17 @@ class Contact extends Component {
                     value.dispatch
                   )}
                 />
+                <Link to={`contact/edit/${this.props.contact.id}`}>
+                  <i
+                    className="fas fa-pencil-alt"
+                    style={{
+                      cursor: 'pointer',
+                      float: 'right',
+                      color: 'black',
+                      marginRight: '1rem'
+                    }}
+                  />
+                </Link>
               </h4>
               {this.state.showContact ? (
                 <ul className="list-group">

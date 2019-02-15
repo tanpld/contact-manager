@@ -13,6 +13,19 @@ class EditContact extends Component {
     errors: {}
   }
 
+  async componentDidMount() {
+    const { id } = this.props.match.params
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    )
+    const contact = res.data
+    this.setState({
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone
+    })
+  }
+
   onChange = e => this.setState({ [e.target.name]: e.target.value })
 
   onSubmit = async (dispatch, e) => {
@@ -32,17 +45,19 @@ class EditContact extends Component {
       return
     }
 
-    const newContact = {
-      name: [this.state.name],
-      email: [this.state.email],
-      phone: [this.state.phone]
+    const updateContact = {
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone
     }
 
-    const res = await axios.post(
-      'https://jsonplaceholder.typicode.com/users',
-      newContact
+    const { id } = this.props.match.params
+    const res = await axios.put(
+      `https://jsonplaceholder.typicode.com/users/${id}`,
+      updateContact
     )
-    dispatch({ type: 'ADD_CONTACT', payload: res.data })
+
+    dispatch({ type: 'UPDATE_CONTACT', payload: res.data })
 
     // Clear state
     this.setState({
@@ -93,7 +108,7 @@ class EditContact extends Component {
                   />
                   <input
                     type="submit"
-                    value="Add"
+                    value="Update"
                     className="btn btn-block btn-info"
                   />
                 </form>
